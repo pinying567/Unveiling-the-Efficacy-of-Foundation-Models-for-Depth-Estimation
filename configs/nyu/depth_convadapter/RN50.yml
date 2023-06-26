@@ -1,0 +1,46 @@
+seed: 1
+model:
+    arch: depth_convadapter
+    name: RN50
+    obj_classes: ['object']
+    depth_classes: ['giant', 'extremely close', 'close', 'not in distance', 'a little remote', 'far', 'unseen']
+    bin_list: [1.00, 1.50, 2.00, 2.25, 2.50, 2.75, 3.00]
+    max_depth: 10
+    temperature: 0.001
+    image_adapter:
+        input_size: 2048
+    clip_weight: 0
+    use_seg: false
+
+data:
+    name: NYU
+    data_root: loader/data/NYU
+    train: loader/data/NYU/train.txt
+    test: loader/data/NYU/test.txt
+    ssl: false
+    height: 416
+    width: 544
+    max_depth: 10
+    depth_scale: 1000
+    batch_size: 8
+    n_workers: 4
+
+loss:
+    pe_loss: 0
+    sym_loss: 0
+    smth_loss: 0 #0.001
+    depth_loss: 1
+    depth_bincls_loss: 0
+optim:
+    name: "sgd"
+    lr: 0.002 #0.0002
+    momentum: 0.9
+    weight_decay: 0.00001
+scheduler:
+    step_size: 30
+    gamma: 0.1
+
+max_epoch: 90
+eval_freq: 5
+print_freq: 1
+exp: RN50/temp0.001/l1/w0/noseg

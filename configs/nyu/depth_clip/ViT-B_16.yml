@@ -1,0 +1,23 @@
+seed: 1
+model:
+    arch: depth_clip
+    name: ViT-B/16
+    obj_classes: ['object']
+    depth_classes: ['giant', 'extremely close', 'close', 'not in distance', 'a little remote', 'far', 'unseen']
+    bin_list: [1.00, 1.50, 2.00, 2.25, 2.50, 2.75, 3.00]
+    temperature: 0.001
+
+data:
+    name: NYU
+    data_root: loader/data/NYU
+    train: loader/data/NYU/train.txt
+    test: loader/data/NYU/test.txt
+    height: 416
+    width: 544
+    max_depth: 10
+    depth_scale: 1000
+    batch_size: 128
+    n_workers: 1
+
+print_freq: 1
+exp: ViT-B_16
